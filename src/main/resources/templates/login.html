@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="layout :: head">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .form-group em {
+            color: #dc3545;
+            font-size: 0.875em;
+        }
+
+        h5 {
+            color: #007bff;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .justify-content-center {
+            justify-content: center !important;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        fieldset {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav th:replace="layout :: header"></nav>
+
+    <div class="container" id="main-content" tiles:fragment="content">
+        <div class="row d-flex justify-content-center">
+            <form style="min-width: 300px;" name="f" th:action="@{/login}" method="post">
+                <h5 class="text-center">Login form</h5>
+                <fieldset>
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="username" name="username" placeholder="Username" />
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password" />
+                        <em style="position: relative; top: 10px;" th:if="${param.error}">Invalid username or password.</em>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 30px;">
+                        <button type="submit" class="btn btn-block btn-primary">
+                            <i class="fa fa-key"></i> Login
+                        </button>
+                    </div>
+                </fieldset>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
